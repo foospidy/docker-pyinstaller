@@ -4,15 +4,15 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ARG WINE_VERSION=winehq-staging
 ARG PYTHON_VERSION=3.6.4
-ARG PYINSTALLER_VERSION=3.3
+ARG PYINSTALLER_VERSION=3.4
 
 # we need wine for this all to work, so we'll use the PPA
 RUN set -x \
     && dpkg --add-architecture i386 \
     && apt-get update -qy \
     && apt-get install --no-install-recommends -qfy apt-transport-https software-properties-common wget \
-    && wget -nv https://dl.winehq.org/wine-builds/Release.key \
-    && apt-key add Release.key \
+    && wget -nv https://dl.winehq.org/wine-builds/winehq.key \
+    && apt-key add winehq.key \
     && add-apt-repository 'https://dl.winehq.org/wine-builds/ubuntu/' \
     && apt-get update -qy \
     && apt-get install --no-install-recommends -qfy $WINE_VERSION winbind cabextract \
