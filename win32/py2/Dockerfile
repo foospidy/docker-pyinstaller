@@ -45,7 +45,8 @@ RUN set -x \
     && echo 'assoc .py=PythonScript' | wine cmd \
     && echo 'ftype PythonScript=c:\Python27\python.exe "%1" %*' | wine cmd \
     && while pgrep wineserver >/dev/null; do echo "Waiting for wineserver"; sleep 1; done \
-    && rm -rf /tmp/.wine-*
+    && rm -rf /tmp/.wine-* \
+    && echo "sysctl -w vm.mmap_min_addr=0" >> /etc/sysctl.conf
 
 # install pyinstaller
 RUN /usr/bin/pip install pyinstaller==$PYINSTALLER_VERSION
